@@ -1,35 +1,20 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args) {
 
-	int strikes = 0;
+	Scanner scanner = new Scanner(System.in);
 
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
+	/*
 
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
+	while (true){
+	    Display.printMenu();
+	    int difficulty = scanner.nextInt();
+	    System.out.println(Word.getWord(difficulty));
+	}
 
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
+	 */
 
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
-
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
-
-	System.out.println(strikes);
-	Display.printHangman(strikes);
-	strikes++;
-
-	System.out.println(strikes);
-	Display.printHangman(strikes);
     }
 }
