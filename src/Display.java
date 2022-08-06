@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Display {
 
@@ -62,5 +62,12 @@ public class Display {
 	System.out.println("2 - Medium  [5-6 letter words]");
 	System.out.println("3 - Hard    [7-8 letter words]" );
 	System.out.println("0 - Quit");
+    }
+
+    //Prompt user for guess
+    public static String promptGuess(){
+	System.out.println("Guess a letter: ");
+	Scanner scanner = new Scanner(System.in);
+	return scanner.nextLine();
     }
 }

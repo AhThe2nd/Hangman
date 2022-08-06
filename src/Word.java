@@ -1,7 +1,10 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
+import java.util.HashMap;
 
 public class Word {
 
@@ -29,7 +32,7 @@ public class Word {
 		break;
 	    case 0:
 		System.out.println("Goodbye. Thanks for playing!");
-		System.exit(1);
+		System.exit(0);
 	    default:
 		System.out.println(difficulty + " is not a valid option, please try again.");
 	}
