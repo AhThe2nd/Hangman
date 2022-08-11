@@ -1,41 +1,65 @@
 import java.util.*;
 
-
 public class Game {
     public static void main(String[] args) {
 
 	Scanner scanner = new Scanner(System.in);
-	System.out.println("Welcome to Hangman!");
+	ArrayList<String> usedWords = new ArrayList<>();
+	    // Game logic
 
-	while (true){
-	    Display.printMenu();
-	    int difficulty = scanner.nextInt();
-	    String word = Word.getWord(difficulty).trim();
-	    System.out.println("Word chosen: " + word);
+	    //MAIN LOOP
+	    while (true){
+		// print welcome message
+		System.out.println("Welcome to hangman!");
+		int strikes = 0;
+		boolean goodGuess = false;
 
-	    // Store game word as a char array and progress as a char array
-	    System.out.println(word);
-	    String[] wordArray = word.split("");
-	    String[] progressArray = "*".repeat(Math.max(0, word.length())).split("");
+		// Get player to select a difficulty
+		Display.printMenu();
+		int difficulty = scanner.nextInt();
+		String word = Word.getWord(difficulty, usedWords).trim();
 
-	    // Print both arrays
-	    System.out.println("Word chosen as array: " + Arrays.toString(wordArray));
-	    System.out.println("Progress as array: " + Arrays.toString(progressArray));
+		// Print word for debugging help
+		System.out.println("Word chosen: " + word);
 
+		// Display progress
+		String[] wordArray = word.split("");
+		String[] progressArray = "*".repeat(Math.max(0, word.length())).split("");
 
-	    // Get a guess from a player
-	    String guess = Display.promptGuess();
+		// SUB LOOP
+		while (true){
+		    // Loop to keep guessing
+		    System.out.println("Word: " + Arrays.toString(progressArray));
 
-	    // Check if the guess is in the word
-	    for (int i = 0; i < wordArray.length; i++){
-		if (guess.equals(wordArray[i])){
-		    progressArray[i] = guess;
+		    // Reset good guess flag
+		    goodGuess = false;
+		    String guess = Display.promptGuess();
+
+		    // Check if the guess is in the word
+		    for (int i = 0; i < wordArray.length; i++){
+			if (guess.equals(wordArray[i])){
+			    progressArray[i] = guess;
+			    goodGuess = true;
+			}
+		    }
+
+		    // Create a list to check for asterisks
+		    List<String> progressList = Arrays.asList(progressArray);
+
+		    if (goodGuess && !progressList.contains("*")){
+			System.out.println("You win!" + " The word was " + word);
+			break;
+		    }
+		    else if (!goodGuess){
+			strikes++;
+			Display.printHangman(strikes);
+
+			if (strikes >= 6){
+			    System.out.println("You lose! Play again?");
+			    // Method to play again.
+			}
+		    }
 		}
 	    }
-	    System.out.println(Arrays.toString(progressArray));
-
-
-
-	}
     }
 }

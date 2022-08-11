@@ -27,32 +27,7 @@ public class Display {
 
     // This method will print the Main Menu
     public static void printHangman(int strikes){
-	switch(strikes){
-	    case 0:
-		System.out.println(getGallowsTextArray()[0]);
-		break;
-	    case 1:
-		System.out.println(getGallowsTextArray()[1]);
-		break;
-	    case 2:
-		System.out.println(getGallowsTextArray()[2]);
-		break;
-	    case 3:
-		System.out.println(getGallowsTextArray()[3]);
-		break;
-	    case 4:
-		System.out.println(getGallowsTextArray()[4]);
-		break;
-	    case 5:
-		System.out.println(getGallowsTextArray()[5]);
-		break;
-	    case 6:
-		System.out.println(getGallowsTextArray()[6]);
-		break;
-	    default:
-		System.out.println("Unknown error. Default value reached in switch statement");
-		break;
-	}
+	System.out.println(getGallowsTextArray()[strikes]);
     }
 
     //Print menu method

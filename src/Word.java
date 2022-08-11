@@ -12,7 +12,7 @@ public class Word {
     // Place word in a list
     // Only choose a word if it isn't already in the list
 
-    public static String getWord(int difficulty){
+    public static String getWord(int difficulty, ArrayList<String> usedWords){
 	String word = "";
 	Path textFile = null;
 	boolean goodChoice = false;
@@ -41,7 +41,7 @@ public class Word {
 	    try{
 		String allWords = Files.readString(textFile);
 		String[] allWordsArray = allWords.split("\n");
-		word = selectRandomWord(allWordsArray);
+		word = selectRandomWord(allWordsArray, usedWords);
 	    }
 	    catch (IOException ioe){
 		ioe.printStackTrace();
@@ -50,10 +50,19 @@ public class Word {
 	return word;
     }
 
-    public static String selectRandomWord(String[] words){
-	Random rand = new Random();
+    public static String selectRandomWord(String[] words, ArrayList<String> usedWords){
 	String randomWord;
-	randomWord = words[rand.nextInt(words.length - 1)];
+	while (true){
+	    // Select a random word
+	    Random rand = new Random();
+	    randomWord = words[rand.nextInt(words.length - 1)];
+
+	    // Only proceed if it isn't in the list already
+	    if (!usedWords.contains(randomWord)){
+		usedWords.add(randomWord);
+		break;
+	    }
+	}
 	return randomWord;
     }
 }
