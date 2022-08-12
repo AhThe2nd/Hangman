@@ -3,6 +3,9 @@ import java.util.*;
 public class Game {
     public static void main(String[] args) {
 
+	// Start background music
+	BackgroundMusic.playBGM();
+
 	Scanner scanner = new Scanner(System.in);
 	ArrayList<String> usedWords = new ArrayList<>();
 	ArrayList<String> guessedLetters = new ArrayList<>();
@@ -25,7 +28,7 @@ public class Game {
 		String word = Word.getWord(difficulty, usedWords).trim();
 
 		// Print word for debugging help
-		System.out.println("Word chosen: " + word);
+		// System.out.println("Word chosen: " + word);
 
 		// Display progress
 		String[] wordArray = word.split("");
@@ -60,12 +63,12 @@ public class Game {
 			uniqueGuess = true;
 		    }
 
-
 		    // Check if the guess is in the word
 		    for (int i = 0; i < wordArray.length; i++){
 			if (guess.equals(wordArray[i]) && uniqueGuess){
 			    progressArray[i] = guess;
 			    goodGuess = true;
+			    SoundEffects.playCorrectAudio();
 			}
 			else if (guess.equals(wordArray[i]) && !uniqueGuess){
 			    goodGuess =true;
@@ -77,6 +80,7 @@ public class Game {
 
 		    if (goodGuess && uniqueGuess && !progressList.contains("_")){
 			System.out.println("You win!" + " The word was: " + word);
+			SoundEffects.playWinAudio();
 
 			StringBuilder guessedLettersString = new StringBuilder();
 			guessedLettersString.append("Guessed letters: ");
@@ -95,15 +99,14 @@ public class Game {
 			    Display.quitGame();
 			}
 		    }
-		    // else if (goodGuess && !uniqueGuess){
-			// System.out.println("You already guessed that letter. Guess a new letter!");
-		    // }
 		    else if (!goodGuess){
 			strikes++;
 			Display.printHangman(strikes);
+			SoundEffects.playIncorrectAudio();
 
 			if (strikes >= 6){
-			    System.out.println("You lose!");
+			    System.out.println("You lose! The word was: " + word);
+			    SoundEffects.playLoseAudio();
 			    String choice = Display.playAgain();
 			    if (choice.equals("1")){
 				break;
@@ -119,4 +122,8 @@ public class Game {
     }
 }
 
-// TO DO: Add sounds effects. Ensure user only enters valid options during menus.
+// TO DO: Ensure user only enters valid options during menus.
+// TO DO: Fix bug where if user guesses duplicate letter they still get a strike
+// TO DO: Don't play incorrect sound if it's the losing guess, only the Price is Right sound
+// TO DO: Clean up Scanner resources?
+// TO DO: ReadME.md
