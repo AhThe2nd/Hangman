@@ -31,8 +31,7 @@ public class Word {
 		goodChoice = true;
 		break;
 	    case 0:
-		System.out.println("Goodbye. Thanks for playing!");
-		System.exit(0);
+		Display.quitGame();
 	    default:
 		System.out.println(difficulty + " is not a valid option, please try again.");
 	}

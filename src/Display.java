@@ -1,11 +1,13 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Display {
 
     // This method gets the gallows ASCII art, splits it into sections and stores it in an array
+
     public static String[] getGallowsTextArray(){
 	Path path = Path.of("gallows.txt");
 	String[] gallowsArray = new String[]{};
@@ -41,8 +43,44 @@ public class Display {
 
     //Prompt user for guess
     public static String promptGuess(){
-	System.out.println("Guess a letter: ");
+
+	String guess;
+	String allowedValues = "abcdefghijklmnopqrstuvwxyz";
+
+	while (true){
+	    System.out.println("Guess a letter: ");
+	    Scanner scanner = new Scanner(System.in);
+
+	    // Add code to ensure user guesses only alphabetical characters
+	    // Make sure they are cast to lower case
+
+	    guess = scanner.next();
+
+	    if (guess.length() > 1){
+		System.out.println("Please only enter one letter per guess!");
+	    }
+	    else if (!allowedValues.contains(guess.toLowerCase())){
+		System.out.println("Please only enter letters!");
+	    }
+	    else{
+		guess = guess.toLowerCase();
+		break;
+	    }
+	}
+	return guess;
+    }
+
+    public static String playAgain(){
+	System.out.println("Would you like to play again?");
+	System.out.println("1 - Play again!");
+	System.out.println("0 - Quit");
 	Scanner scanner = new Scanner(System.in);
 	return scanner.nextLine();
+
+    }
+
+    public static void quitGame(){
+	System.out.println("Thanks for playing!");
+	System.exit(0);
     }
 }
